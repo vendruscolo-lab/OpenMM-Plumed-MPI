@@ -1,7 +1,3 @@
-[![GH Actions Status](https://github.com/openmm/openmm-plumed/workflows/CI/badge.svg)](https://github.com/openmm/openmm-plumed/actions?query=branch%3Amaster+workflow%3ACI)
-[![Conda](https://img.shields.io/conda/v/conda-forge/openmm-plumed.svg)](https://anaconda.org/conda-forge/openmm-plumed)
-[![Anaconda Cloud Badge](https://anaconda.org/conda-forge/openmm-plumed/badges/downloads.svg)](https://anaconda.org/conda-forge/openmm-plumed)
-
 OpenMM PLUMED Plugin
 =====================
 
@@ -9,17 +5,6 @@ This project provides a connection between [OpenMM](http://openmm.org) and [PLUM
 It allows you to bias or analyze an OpenMM simulation based on collective variables.
 
 This plugin requires PLUMED version 2.3b or greater.
-
-Installing The Plugin
-=====================
-
-We provide [conda](https://docs.conda.io/) packages for Linux and MacOS via [`conda-forge`](https://conda-forge.org/), which can be installed from the [conda-forge channel](https://anaconda.org/conda-forge/openmm-plumed):
-
-```bash
-conda install -c conda-forge openmm-plumed
-```
-
-If you don't have `conda` available, we recommend installing [Miniconda for Python 3](https://docs.conda.io/en/latest/miniconda.html) to provide the `conda` package manager.  
 
 Building The Plugin
 ===================
