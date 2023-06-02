@@ -1,0 +1,202 @@
+<ForceField>
+
+ <AtomTypes>
+  <Type name="ARG" class="C" element="C-ARG" mass="156.19"/>
+  <Type name="ASP" class="C" element="C-ASP" mass="115.09"/>
+  <Type name="ASN" class="C" element="C-ASN" mass="114.1"/>
+  <Type name="GLU" class="C" element="C-GLU" mass="129.11"/>
+  <Type name="LYS" class="C" element="C-LYS" mass="128.17"/>
+  <Type name="HIS" class="C" element="C-HIS" mass="137.14"/>
+  <Type name="GLN" class="C" element="C-GLN" mass="128.13"/>
+  <Type name="SER" class="C" element="C-SER" mass="87.08"/>
+  <Type name="CYS" class="C" element="C-CYS" mass="103.14"/>
+  <Type name="GLY" class="C" element="C-GLY" mass="57.05"/>
+  <Type name="THR" class="C" element="C-THR" mass="101.11"/>
+  <Type name="ALA" class="C" element="C-ALA" mass="71.07"/>
+  <Type name="MET" class="C" element="C-MET" mass="131.2"/>
+  <Type name="TYR" class="C" element="C-TYR" mass="163.18"/>
+  <Type name="VAL" class="C" element="C-VAL" mass="99.13"/>
+  <Type name="TRP" class="C" element="C-TRP" mass="186.22"/>
+  <Type name="LEU" class="C" element="C-LEU" mass="113.16"/>
+  <Type name="ILE" class="C" element="C-ILE" mass="113.16"/>
+  <Type name="PRO" class="C" element="C-PRO" mass="97.12"/>
+  <Type name="PHE" class="C" element="C-PHE" mass="147.18"/>
+  <Type name="X" class="C" element="C-X" mass="133.2"/>
+  <Type name="Z" class="C" element="C-Z" mass="147.2"/>
+ </AtomTypes>
+
+ <Residues>
+  <Residue name="ARG">
+   <Atom name="ARG" type="ARG" charge="1.0"/>
+   <ExternalBond atomName="ARG"/>
+   <ExternalBond atomName="ARG"/>
+  </Residue>
+  <Residue name="ASP">
+   <Atom name="ASP" type="ASP" charge="-1.0"/>
+   <ExternalBond atomName="ASP"/>
+   <ExternalBond atomName="ASP"/>
+  </Residue>
+  <Residue name="ASN">
+   <Atom name="ASN" type="ASN" charge="0.0"/>
+   <ExternalBond atomName="ASN"/>
+   <ExternalBond atomName="ASN"/>
+  </Residue>
+  <Residue name="GLU">
+   <Atom name="GLU" type="GLU" charge="-1.0"/>
+   <ExternalBond atomName="GLU"/>
+   <ExternalBond atomName="GLU"/>
+  </Residue>
+  <Residue name="LYS">
+   <Atom name="LYS" type="LYS" charge="1.0"/>
+   <ExternalBond atomName="LYS"/>
+   <ExternalBond atomName="LYS"/>
+  </Residue>
+  <Residue name="HIS">
+   <Atom name="HIS" type="HIS" charge="0.038286503882254706"/>
+   <ExternalBond atomName="HIS"/>
+   <ExternalBond atomName="HIS"/>
+  </Residue>
+  <Residue name="GLN">
+   <Atom name="GLN" type="GLN" charge="0.0"/>
+   <ExternalBond atomName="GLN"/>
+   <ExternalBond atomName="GLN"/>
+  </Residue>
+  <Residue name="SER">
+   <Atom name="SER" type="SER" charge="0.0"/>
+   <ExternalBond atomName="SER"/>
+   <ExternalBond atomName="SER"/>
+  </Residue>
+  <Residue name="CYS">
+   <Atom name="CYS" type="CYS" charge="0.0"/>
+   <ExternalBond atomName="CYS"/>
+   <ExternalBond atomName="CYS"/>
+  </Residue>
+  <Residue name="GLY">
+   <Atom name="GLY" type="GLY" charge="0.0"/>
+   <ExternalBond atomName="GLY"/>
+   <ExternalBond atomName="GLY"/>
+  </Residue>
+  <Residue name="THR">
+   <Atom name="THR" type="THR" charge="0.0"/>
+   <ExternalBond atomName="THR"/>
+   <ExternalBond atomName="THR"/>
+  </Residue>
+  <Residue name="ALA">
+   <Atom name="ALA" type="ALA" charge="0.0"/>
+   <ExternalBond atomName="ALA"/>
+   <ExternalBond atomName="ALA"/>
+  </Residue>
+  <Residue name="MET">
+   <Atom name="MET" type="MET" charge="0.0"/>
+   <ExternalBond atomName="MET"/>
+   <ExternalBond atomName="MET"/>
+  </Residue>
+  <Residue name="TYR">
+   <Atom name="TYR" type="TYR" charge="0.0"/>
+   <ExternalBond atomName="TYR"/>
+   <ExternalBond atomName="TYR"/>
+  </Residue>
+  <Residue name="VAL">
+   <Atom name="VAL" type="VAL" charge="0.0"/>
+   <ExternalBond atomName="VAL"/>
+   <ExternalBond atomName="VAL"/>
+  </Residue>
+  <Residue name="TRP">
+   <Atom name="TRP" type="TRP" charge="0.0"/>
+   <ExternalBond atomName="TRP"/>
+   <ExternalBond atomName="TRP"/>
+  </Residue>
+  <Residue name="LEU">
+   <Atom name="LEU" type="LEU" charge="0.0"/>
+   <ExternalBond atomName="LEU"/>
+   <ExternalBond atomName="LEU"/>
+  </Residue>
+  <Residue name="ILE">
+   <Atom name="ILE" type="ILE" charge="0.0"/>
+   <ExternalBond atomName="ILE"/>
+   <ExternalBond atomName="ILE"/>
+  </Residue>
+  <Residue name="PRO">
+   <Atom name="PRO" type="PRO" charge="0.0"/>
+   <ExternalBond atomName="PRO"/>
+   <ExternalBond atomName="PRO"/>
+  </Residue>
+  <Residue name="PHE">
+   <Atom name="PHE" type="PHE" charge="0.0"/>
+   <ExternalBond atomName="PHE"/>
+   <ExternalBond atomName="PHE"/>
+  </Residue>
+  <Residue name="X">
+   <Atom name="X" type="X" charge="1.0"/>
+   <ExternalBond atomName="X"/>
+  </Residue>
+  <Residue name="Z">
+   <Atom name="Z" type="Z" charge="-1.0"/>
+   <ExternalBond atomName="Z"/>
+  </Residue>
+ </Residues>
+
+ <HarmonicBondForce>
+  <Bond class1="C" class2="C" length="0.38" k="8033.0"/>
+ </HarmonicBondForce>
+
+ <CustomNonbondedForce energy="RT*lB*epsilon1*epsilon2*(exp(-r*kappa)/r-exp(-r_cut*kappa)/r_cut)" bondCutoff="0">
+  <GlobalParameter name="RT" defaultValue="2.477721"/>
+  <GlobalParameter name="lB" defaultValue="0.7146939963251481"/>
+  <GlobalParameter name="kappa" defaultValue="1.4708397902425203"/>
+  <GlobalParameter name="r_cut" defaultValue="4"/>
+  <PerParticleParameter name="epsilon"/>
+  <Atom type="ARG" epsilon="1.0"/>
+  <Atom type="ASP" epsilon="-1.0"/>
+  <Atom type="ASN" epsilon="0.0"/>
+  <Atom type="GLU" epsilon="-1.0"/>
+  <Atom type="LYS" epsilon="1.0"/>
+  <Atom type="HIS" epsilon="0.038286503882254706"/>
+  <Atom type="GLN" epsilon="0.0"/>
+  <Atom type="SER" epsilon="0.0"/>
+  <Atom type="CYS" epsilon="0.0"/>
+  <Atom type="GLY" epsilon="0.0"/>
+  <Atom type="THR" epsilon="0.0"/>
+  <Atom type="ALA" epsilon="0.0"/>
+  <Atom type="MET" epsilon="0.0"/>
+  <Atom type="TYR" epsilon="0.0"/>
+  <Atom type="VAL" epsilon="0.0"/>
+  <Atom type="TRP" epsilon="0.0"/>
+  <Atom type="LEU" epsilon="0.0"/>
+  <Atom type="ILE" epsilon="0.0"/>
+  <Atom type="PRO" epsilon="0.0"/>
+  <Atom type="PHE" epsilon="0.0"/>
+  <Atom type="X" epsilon="1.0"/>
+  <Atom type="Z" epsilon="-1.0"/>
+ </CustomNonbondedForce>
+ 
+  <CustomNonbondedForce energy="c1*vlj+c2-shift;vlj=4*epsilon*((sigma/r)^12-(sigma/r)^6);c1=select(delta(d),lambda,s1);c2=select(delta(d),0,s2);s1=select(step(d),lambda,1);s2=select(step(d),0,(1-lambda)*epsilon);d=r-threshold*sigma;shift=lambda*vlj_shift;vlj_shift=4*epsilon*((sigma/rcut)^12-(sigma/rcut)^6);lambda=0.5*(lambda1+lambda2);sigma=0.5*(sigma1+sigma2)" bondCutoff="0">
+  <GlobalParameter name="epsilon" defaultValue="0.8368000000000001"/>
+  <GlobalParameter name="threshold" defaultValue="1.122462048309373"/>
+  <GlobalParameter name="rcut" defaultValue="2"/>
+  <PerParticleParameter name="sigma"/>
+  <PerParticleParameter name="lambda"/>
+  <Atom type="ARG" sigma="0.6559999999999999" lambda="0.7307624767517166"/>
+  <Atom type="ASP" sigma="0.5579999999999999" lambda="0.0416040480605567"/>
+  <Atom type="ASN" sigma="0.568" lambda="0.4255859009787713"/>
+  <Atom type="GLU" sigma="0.5920000000000001" lambda="0.0006935460962935"/>
+  <Atom type="LYS" sigma="0.636" lambda="0.1790211738990582"/>
+  <Atom type="HIS" sigma="0.608" lambda="0.4663667290557992"/>
+  <Atom type="GLN" sigma="0.602" lambda="0.3934318551056041"/>
+  <Atom type="SER" sigma="0.518" lambda="0.4625416811611541"/>
+  <Atom type="CYS" sigma="0.5479999999999999" lambda="0.5615435099141777"/>
+  <Atom type="GLY" sigma="0.45" lambda="0.7058843733666401"/>
+  <Atom type="THR" sigma="0.562" lambda="0.3713162976273964"/>
+  <Atom type="ALA" sigma="0.504" lambda="0.2743297969040348"/>
+  <Atom type="MET" sigma="0.618" lambda="0.5308481134337497"/>
+  <Atom type="TYR" sigma="0.6459999999999999" lambda="0.9774611449343455"/>
+  <Atom type="VAL" sigma="0.5860000000000001" lambda="0.2083769608174481"/>
+  <Atom type="TRP" sigma="0.6779999999999999" lambda="0.9893764740371644"/>
+  <Atom type="LEU" sigma="0.618" lambda="0.6440005007782226"/>
+  <Atom type="ILE" sigma="0.618" lambda="0.5423623610671892"/>
+  <Atom type="PRO" sigma="0.5559999999999999" lambda="0.3593126576364644"/>
+  <Atom type="PHE" sigma="0.636" lambda="0.8672358982062975"/>
+  <Atom type="X" sigma="0.618" lambda="0.5308481134337497"/>
+  <Atom type="Z" sigma="0.618" lambda="0.5308481134337497"/>
+ </CustomNonbondedForce>
+</ForceField>
