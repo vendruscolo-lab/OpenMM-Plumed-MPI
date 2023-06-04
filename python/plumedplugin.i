@@ -4,7 +4,7 @@
 %import(module="simtk.openmm") "swig/OpenMMSwigHeaders.i"
 %include "swig/typemaps.i"
 %include "std_string.i"
-%include "/home/hussein/miniconda3/lib/python3.9/site-packages/mpi4py/include/mpi4py/mpi4py.i"
+%include "mpi4py.i"
 %mpi4py_typemap(Comm, MPI_Comm);
 
 %{
