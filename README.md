@@ -1,91 +1,46 @@
-OpenMM PLUMED Plugin
-=====================
+NOTE: If using anaconda replace miniconda3 with your anaconda folder.
 
-This project provides a connection between [OpenMM](http://openmm.org) and [PLUMED](http://www.plumed.org).
-It allows you to bias or analyze an OpenMM simulation based on collective variables.
+conda create -n pl python=3.9
+conda activate pl
 
-This plugin requires PLUMED version 2.3b or greater.
+conda install mpich
+conda install mpi4py
+conda install openmm -c conda-forge
+conda install plumed=2.8.2=mpi_mpich_h7ded119_0 -c conda-forge
+conda install py-plumed -c conda-forge
+conda install cmake swig
 
-Building The Plugin
-===================
+cd /pool/work/faidon/
+git clone https://github.com/husseinmur/OpenMM-Plumed-MPI
 
-This project uses [CMake](http://www.cmake.org) for its build system.  To build it, follow these
-steps:
+cd OpenMM-Plumed-MPI
+mkdir build install openmm -p plumed/include -p plumed/lib
+unzip openmm.zip -d openmm
+unizp plumed_include.zip -d plumed/include
+unizp plumed_lib.zip -d plumed/lib
 
-1. Create a directory in which to build the plugin.
+cd build
+ccmake ..
 
-2. Run the CMake GUI or ccmake, specifying your new directory as the build directory and the top
-level directory of this project as the source directory.
+click c to configure
 
-3. Press "Configure".
+set:
+CMAKE_INSTALL_PREFIX             /pool/work/faidon/OpenMM-Plumed-MPI/install
+CUDA_USE_STATIC_CUDA_RUNTIME     OFF
+MPI4PY_DIR                       /home/faidon/miniconda3/envs/pl/lib/python3.9/site-packages/mpi4py/include
+OPENMM_DIR                       /pool/work/faidon/OpenMM-Plumed-MPI/openmm
+PLUMED_BUILD_CUDA_LIB            OFF
+PLUMED_BUILD_OPENCL_LIB          OFF
+PLUMED_INCLUDE_DIR               /pool/work/faidon/OpenMM-Plumed-MPI/plumed/include
+PLUMED_LIBRARY_DIR               /pool/work/faidon/OpenMM-Plumed-MPI/plumed/lib
 
-4. Set OPENMM_DIR to point to the directory where OpenMM is installed.  This is needed to locate
-the OpenMM header files and libraries.
+click c then g
 
-5. Set PLUMED_INCLUDE_DIR and PLUMED_LIBRARY_DIR to point to the directories where the PLUMED header
-files and libraries are installed.
+make
+make install
+make PythonInstall
 
-6. Set CMAKE_INSTALL_PREFIX to the directory where the plugin should be installed.  Usually,
-this will be the same as OPENMM_DIR, so the plugin will be added to your OpenMM installation.
+cd ../install/lib
+cp -r * ~/miniconda3/envs/pl/lib
 
-7. If you plan to build the OpenCL platform, make sure that OPENCL_INCLUDE_DIR and
-OPENCL_LIBRARY are set correctly, and that PLUMED_BUILD_OPENCL_LIB is selected.
-
-8. If you plan to build the CUDA platform, make sure that CUDA_TOOLKIT_ROOT_DIR is set correctly
-and that PLUMED_BUILD_CUDA_LIB is selected.
-
-9. Press "Configure" again if necessary, then press "Generate".
-
-10. Use the build system you selected to build and install the plugin.  For example, if you
-selected Unix Makefiles, type `make install` to install the plugin, and `make PythonInstall` to
-install the Python wrapper.
-
-Using The Plugin
-================
-
-Simply create a `PlumedForce` object, passing the PLUMED control script as an argument to the
-constructor, then add it to your `System`.  For example,
-
-```Python
-script = """
-d: DISTANCE ATOMS=1,10
-METAD ARG=d SIGMA=0.2 HEIGHT=0.3 PACE=500"""
-system.addForce(PlumedForce(script))
-```
-
-Be aware that PLUMED numbers atoms starting from 1, whereas OpenMM numbers them starting from 0.
-The example above performs metadynamics based on the distance between atoms 0 and 9 (in OpenMM's
-numbering system).
-
-
-License
-=======
-
-This is part of the OpenMM molecular simulation toolkit originating from
-Simbios, the NIH National Center for Physics-Based Simulation of
-Biological Structures at Stanford, funded under the NIH Roadmap for
-Medical Research, grant U54 GM072970. See https://simtk.org.
-
-Portions copyright (c) 2016 Stanford University and the Authors.
-
-Authors: Peter Eastman
-
-Contributors:
-
-Permission is hereby granted, free of charge, to any person obtaining a
-copy of this software and associated documentation files (the "Software"),
-to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-THE AUTHORS, CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-USE OR OTHER DEALINGS IN THE SOFTWARE.
+DONE
