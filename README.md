@@ -19,8 +19,8 @@ git clone https://github.com/husseinmur/OpenMM-Plumed-MPI
 cd OpenMM-Plumed-MPI
 mkdir build install openmm -p plumed/include -p plumed/lib
 unzip openmm.zip -d openmm
-unizp plumed_include.zip -d plumed/include
-unizp plumed_lib.zip -d plumed/lib
+unzip plumed_include.zip -d plumed/include
+unzip plumed_lib.zip -d plumed/lib
 
 cd build
 ccmake ..
@@ -29,11 +29,11 @@ ccmake ..
 click c to configure and set:
 ```
 CMAKE_INSTALL_PREFIX             /pool/work/faidon/OpenMM-Plumed-MPI/install
-CUDA_USE_STATIC_CUDA_RUNTIME     OFF
+CUDA_USE_STATIC_CUDA_RUNTIME     ON
 MPI4PY_DIR                       /home/faidon/miniconda3/envs/pl/lib/python3.9/site-packages/mpi4py/include
 OPENMM_DIR                       /pool/work/faidon/OpenMM-Plumed-MPI/openmm
-PLUMED_BUILD_CUDA_LIB            OFF
-PLUMED_BUILD_OPENCL_LIB          OFF
+PLUMED_BUILD_CUDA_LIB            ON
+PLUMED_BUILD_OPENCL_LIB          ON
 PLUMED_INCLUDE_DIR               /pool/work/faidon/OpenMM-Plumed-MPI/plumed/include
 PLUMED_LIBRARY_DIR               /pool/work/faidon/OpenMM-Plumed-MPI/plumed/lib
 ```
