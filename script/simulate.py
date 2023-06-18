@@ -11,6 +11,8 @@ from openmmplumed import PlumedForce
 comm1 = MPI.COMM_SELF
 comm2 = MPI.COMM_WORLD
 
+platform = Platform.getPlatformByName('CUDA')
+
 residues = pd.read_csv("residues.csv").set_index('one')
 
 fasta = """MSEYIRVTEDENDEPIEIPSEDDGTVLLSTVTAQFPGACGLRYRNPVSQCMRGVRLVEGILHAPDAGWGNLVYVVNYPKDNKRKMDETDASSAVKVKRAVQKTSDLIVLGLPWKTTEQDLKEYFSTFGEVLMVQVKKDLKTGHSKGFGFVRFTEYETQVKVMSQRHMIDGRWCDCKLPNSKQSQDEPLRSRKVFVGRCTEDMTEDELREFFSQYGDVMDVFIPKPFRAFAFVTFADDQIAQSLCGEDLIIKGISVHISNAEPKHNSNRQLERSGRFGGNPGGFGNQGGFGNSRGGGAGLGNNQGSNMGGGMNFGAFSINPAMMAAAQAALQSSWGMMGMLASQQNQSGPSGNNQNQGNMQREPNQAFGSGNNSYSGSNSGAAIGWGSASNAGSGSGFNGGFGSSMDSKSSGWGM""".replace('\n', '')
@@ -139,17 +141,17 @@ stats_output_file = "stats.csv"
 
 integrator = LangevinIntegrator(298*kelvin, 0.01/picosecond, 0.005*picoseconds)
 
-simulation = Simulation(top, system, integrator)
+simulation = Simulation(top, system, integrator, platform)
     
 simulation.context.setPositions(pdb.positions)
 
 #simulation.minimizeEnergy()
 
-simulation.loadCheckpoint("checkpoint")
+simulation.loadCheckpoint("checkpoint_CUDA")
 
 simulation.reporters.append(DCDReporter(DCD_output_file, N_save))
 
 simulation.reporters.append(StateDataReporter(stats_output_file, N_save, step=True, potentialEnergy=True, temperature=True))
 
-simulation.step(100000)
+simulation.step(100000000000)
 

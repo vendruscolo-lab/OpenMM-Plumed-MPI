@@ -137,6 +137,19 @@ void CudaCalcPlumedForceKernel::initialize(const System& system, const PlumedFor
     // Construct and initialize the PLUMED interface object.
 
     plumedmain = plumed_create();
+    int done_already;
+    MPI_Initialized(&done_already);
+    if (!done_already)
+        MPI_Init(NULL, NULL);
+    int intra_comm_rank;
+    MPI_Comm intra_comm = force.getIntracom();
+    MPI_Comm inter_comm = force.getIntercom();
+    MPI_Comm_rank(intra_comm, &intra_comm_rank);
+    if (intra_comm_rank == 0)
+        plumed_cmd(plumedmain, "GREX setMPIIntercomm", &inter_comm);
+    plumed_cmd(plumedmain, "GREX setMPIIntracomm", &intra_comm);
+    plumed_cmd(plumedmain, "GREX init");
+    plumed_cmd(plumedmain, "setMPIComm", &intra_comm);
     hasInitialized = true;
     int apiVersion;
     plumed_cmd(plumedmain, "getApiVersion", &apiVersion);
@@ -159,7 +172,6 @@ void CudaCalcPlumedForceKernel::initialize(const System& system, const PlumedFor
         plumed_cmd(plumedmain, "setKbT", &kT);
     int restart = force.getRestart();
     plumed_cmd(plumedmain, "setRestart", &restart);
-    plumed_cmd(plumedmain, "setMPIComm", force.getMPI());
     plumed_cmd(plumedmain, "init", NULL);
     if(apiVersion > 7) {
         plumed_cmd(plumedmain, "readInputLines", force.getScript().c_str());
@@ -238,7 +250,7 @@ void CudaCalcPlumedForceKernel::executeOnWorkerThread() {
         plumed_cmd(plumedmain, "setBox", &boxVectors[0][0]);
     }
     double virial[9];
-    plumed_cmd(plumedmain, "setVirial", &virial);
+    plumed_cmd(plumedmain, "setVirial", &virial[0], 9);
 
     // Calculate the forces and energy.
 
