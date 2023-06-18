@@ -71,11 +71,14 @@ ReferenceCalcPlumedForceKernel::~ReferenceCalcPlumedForceKernel() {
 void ReferenceCalcPlumedForceKernel::initialize(const System& system, const PlumedForce& force) {
     // Construct and initialize the PLUMED interface object.
     plumedmain = plumed_create();
+    int done_already;
+    MPI_Initialized(&done_already);
+    if (!done_already)
+        MPI_Init(NULL, NULL);
     int intra_comm_rank;
     MPI_Comm intra_comm = force.getIntracom();
     MPI_Comm inter_comm = force.getIntercom();
     MPI_Comm_rank(intra_comm, &intra_comm_rank);
-    MPI_Init(NULL, NULL);
     if (intra_comm_rank == 0)
         plumed_cmd(plumedmain, "GREX setMPIIntercomm", &inter_comm);
     plumed_cmd(plumedmain, "GREX setMPIIntracomm", &intra_comm);
