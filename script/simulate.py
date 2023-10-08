@@ -73,6 +73,7 @@ forces[2].setCutoffDistance(2*nanometers)
 for bond in r1_exclusions:
     forces[2].addExclusion(bond[0],bond[1])
 
+#sample script
 script = """MOLINFO MOLTYPE=protein STRUCTURE=input.pdb
 WHOLEMOLECULES ENTITY0=1-414
 
@@ -143,8 +144,7 @@ simulation = Simulation(top, system, integrator)
     
 simulation.context.setPositions(pdb.positions)
 
-#simulation.minimizeEnergy()
-
+#Checkpoint of system after energy minimisation
 simulation.loadCheckpoint("checkpoint")
 
 simulation.reporters.append(DCDReporter(DCD_output_file, N_save))

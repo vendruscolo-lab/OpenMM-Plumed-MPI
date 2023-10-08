@@ -1,6 +1,6 @@
-# How to install OpenMM-Plumed-MPI
+# OpenMM-Plumed with MPI Support
 
-#### NOTE: if using anaconda replace miniconda3 with your anaconda folder.
+## Installation
 
 ```
 conda create -n pl python=3.9
@@ -12,8 +12,9 @@ conda install openmm -c conda-forge
 conda install plumed=2.8.2=mpi_mpich_h7ded119_0 -c conda-forge
 conda install py-plumed -c conda-forge
 conda install cmake swig
+conda install pandas
+conda install mdtraj -c conda-forge
 
-cd /pool/work/faidon/
 git clone https://github.com/husseinmur/OpenMM-Plumed-MPI
 
 cd OpenMM-Plumed-MPI
@@ -26,16 +27,13 @@ cd build
 ccmake ..
 ```
 
-click c to configure and set:
+click c to configure and set (replace paths as required):
 ```
-CMAKE_INSTALL_PREFIX             /pool/work/faidon/OpenMM-Plumed-MPI/install
-CUDA_USE_STATIC_CUDA_RUNTIME     ON
-MPI4PY_DIR                       /home/faidon/miniconda3/envs/pl/lib/python3.9/site-packages/mpi4py/include
-OPENMM_DIR                       /pool/work/faidon/OpenMM-Plumed-MPI/openmm
-PLUMED_BUILD_CUDA_LIB            ON
-PLUMED_BUILD_OPENCL_LIB          ON
-PLUMED_INCLUDE_DIR               /pool/work/faidon/OpenMM-Plumed-MPI/plumed/include
-PLUMED_LIBRARY_DIR               /pool/work/faidon/OpenMM-Plumed-MPI/plumed/lib
+CMAKE_INSTALL_PREFIX             {git clone path}/OpenMM-Plumed-MPI/install
+MPI4PY_DIR                       {user path}/miniconda3/envs/pl/lib/python3.9/site-packages/mpi4py/include
+OPENMM_DIR                       {git clone path}/OpenMM-Plumed-MPI/openmm
+PLUMED_INCLUDE_DIR               {git clone path}/OpenMM-Plumed-MPI/plumed/include
+PLUMED_LIBRARY_DIR               {git clone path}/OpenMM-Plumed-MPI/plumed/lib
 ```
 Keep everything else as is and click c then g then:
 ```
@@ -46,4 +44,14 @@ make PythonInstall
 cd ../install/lib
 cp -r * ~/miniconda3/envs/pl/lib
 ```
-DONE
+
+## Running the simulation
+In the script folder, run `simulate.py` as follows:
+
+```
+mpirun -np {number of replicas} python simulate.py
+```
+
+Note: you might need to replace the checkpoint, the forcefield xml, and other files if you need to run the simulation on a different system. The provided files are prepared for TDP-43.
+
+To generate the forcefield xml and the exclusions pickle for a different system, you can use the `gen_xml_and_constraints.py` script in the scripts folder. It takes a fasta file as a parameter, and the file should only include a fasta sequence.
