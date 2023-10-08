@@ -68,8 +68,7 @@ void testForce() {
         "d: DISTANCE ATOMS=1,3\n"
         "BIASVALUE ARG=d";
     MPI_Comm comm;
-    MPI_Comm comm2;
-    PlumedForce* plumed = new PlumedForce(script, comm, comm2);
+    PlumedForce* plumed = new PlumedForce(script, comm);
     system.addForce(plumed);
     LangevinIntegrator integ(300.0, 1.0, 1.0);
     Platform& platform = Platform::getPlatformByName("OpenCL");
@@ -101,8 +100,7 @@ void testMetadynamics() {
         "p: POSITION ATOM=1\n"
         "METAD ARG=p.x SIGMA=0.5 HEIGHT=0.1 PACE=1";
     MPI_Comm comm;
-    MPI_Comm comm2;
-    PlumedForce* plumed = new PlumedForce(script, comm, comm2);
+    PlumedForce* plumed = new PlumedForce(script, comm);
     system.addForce(plumed);
     vector<Vec3> positions;
     positions.push_back(Vec3());
@@ -151,8 +149,7 @@ void testWellTemperedMetadynamics() {
 
     // Create a well-tempered metadynamics simulation
     MPI_Comm comm;
-    MPI_Comm comm2;
-    PlumedForce* plumed = new PlumedForce(script, comm, comm2);
+    PlumedForce* plumed = new PlumedForce(script, comm);
     plumed->setTemperature(temperatue); // This is tested here!
     system.addForce(plumed);
     LangevinIntegrator integ(temperatue, 1.0, 1.0);
@@ -192,8 +189,7 @@ void testMassesCharges() {
     // Setup PLUMED to write the mass and chage of the particles to a file
     const string script = "DUMPMASSCHARGE ATOMS=@mdatoms FILE=mass_charge.txt";
     MPI_Comm comm;
-    MPI_Comm comm2;
-    PlumedForce* plumed = new PlumedForce(script, comm, comm2);
+    PlumedForce* plumed = new PlumedForce(script, comm);
     system.addForce(plumed);
 
     // Setup simulation
@@ -267,8 +263,7 @@ void testScript() {
                           "  STRIDE=10\n"
                           "...";
     MPI_Comm comm;
-    MPI_Comm comm2;
-    PlumedForce* plumed = new PlumedForce(script, comm, comm2);
+    PlumedForce* plumed = new PlumedForce(script, comm);
     system.addForce(plumed);
 
     // Setup simulation
