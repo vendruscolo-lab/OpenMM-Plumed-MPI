@@ -6,17 +6,21 @@ SET (CMAKE_CPP_COMPILER g++)
 PROJECT(OpenMMPlumed)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-# We need to know where OpenMM is installed so we can access the headers and libraries.
-SET(OPENMM_DIR "/usr/local/openmm" CACHE PATH "Where OpenMM is installed")
+# Set installation prefix to current directory/install
+SET(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH "Installation prefix" FORCE)
+
+# OpenMM directory set relative to current directory
+SET(OPENMM_DIR "${CMAKE_CURRENT_SOURCE_DIR}/openmm" CACHE PATH "Where OpenMM is installed")
 INCLUDE_DIRECTORIES("${OPENMM_DIR}/include")
 LINK_DIRECTORIES("${OPENMM_DIR}/lib" "${OPENMM_DIR}/lib/plugins")
 
-SET(MPI4PY_DIR "/home/hussein/miniconda3/lib/python3.9/site-packages/mpi4py/include" CACHE PATH "Where mpi4py is installed")
-INCLUDE_DIRECTORIES("${MPI4PY_DIR}/mpi4py")
+# MPI4PY directory with exact path
+SET(MPI4PY_DIR "/usr/local/lib/python3.10/site-packages/mpi4py/include" CACHE PATH "Where mpi4py is installed")
+INCLUDE_DIRECTORIES("${MPI4PY_DIR}")
 
-# We also need to know where Plumed is installed.
-SET(PLUMED_LIBRARY_DIR "/usr/local/lib" CACHE PATH "Where the Plumed libraries are installed")
-SET(PLUMED_INCLUDE_DIR "/usr/local/include/plumed" CACHE PATH "Where the Plumed header files are installed")
+# Plumed directories set relative to current directory
+SET(PLUMED_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/plumed/lib" CACHE PATH "Where the Plumed libraries are installed")
+SET(PLUMED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/plumed/include" CACHE PATH "Where the Plumed header files are installed")
 INCLUDE_DIRECTORIES("${PLUMED_INCLUDE_DIR}")
 LINK_DIRECTORIES("${PLUMED_LIBRARY_DIR}")
 
@@ -28,15 +32,6 @@ IF(APPLE)
     SET (CMAKE_INSTALL_NAME_DIR "@rpath")
     SET(EXTRA_COMPILE_FLAGS "-msse2 -stdlib=libc++")
 ENDIF(APPLE)
-
-# Select where to install
-IF(${CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT})
-    IF(WIN32)
-        SET(CMAKE_INSTALL_PREFIX "$ENV{ProgramFiles}/OpenMM" CACHE PATH "Where to install the plugin" FORCE)
-    ELSE(WIN32)
-        SET(CMAKE_INSTALL_PREFIX "/usr/local/openmm" CACHE PATH "Where to install the plugin" FORCE)
-    ENDIF(WIN32)
-ENDIF(${CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT})
 
 # The source is organized into subdirectories, but we handle them all from
 # this CMakeLists file rather than letting CMake visit them as SUBDIRS.
@@ -71,12 +66,10 @@ FOREACH(subdir ${PLUMED_PLUGIN_SOURCE_SUBDIRS})
 ENDFOREACH(subdir)
 
 # Build MPI and make it required
-
 FIND_PACKAGE(MPI REQUIRED)
 INCLUDE_DIRECTORIES(SYSTEM ${MPI_INCLUDE_PATH})
 
 # Create the library.
-
 ADD_LIBRARY(${SHARED_PLUMED_TARGET} SHARED ${SOURCE_FILES} ${SOURCE_INCLUDE_FILES} ${API_INCLUDE_FILES})
 SET_TARGET_PROPERTIES(${SHARED_PLUMED_TARGET}
     PROPERTIES COMPILE_FLAGS "-DPLUMED_BUILDING_SHARED_LIBRARY ${EXTRA_COMPILE_FLAGS}"
@@ -91,13 +84,12 @@ FILE(GLOB API_ONLY_INCLUDE_FILES_INTERNAL "openmmapi/include/internal/*.h")
 INSTALL (FILES ${API_ONLY_INCLUDE_FILES_INTERNAL} DESTINATION include/internal)
 
 # Build the implementations for different platforms
-
 ADD_SUBDIRECTORY(platforms/reference)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}")
 FIND_PACKAGE(OpenCL QUIET)
 IF(OPENCL_FOUND)
-    SET(PLUMED_BUILD_OPENCL_LIB ON CACHE BOOL "Build implementation for OpenCL")
+    SET(PLUMED_BUILD_OPENCL_LIB OFF CACHE BOOL "Build implementation for OpenCL")
 ELSE(OPENCL_FOUND)
     SET(PLUMED_BUILD_OPENCL_LIB OFF CACHE BOOL "Build implementation for OpenCL")
 ENDIF(OPENCL_FOUND)
@@ -107,7 +99,7 @@ ENDIF(PLUMED_BUILD_OPENCL_LIB)
 
 FIND_PACKAGE(CUDA QUIET)
 IF(CUDA_FOUND)
-    SET(PLUMED_BUILD_CUDA_LIB ON CACHE BOOL "Build implementation for CUDA")
+    SET(PLUMED_BUILD_CUDA_LIB OFF CACHE BOOL "Build implementation for CUDA")
 ELSE(CUDA_FOUND)
     SET(PLUMED_BUILD_CUDA_LIB OFF CACHE BOOL "Build implementation for CUDA")
 ENDIF(CUDA_FOUND)
@@ -116,7 +108,6 @@ IF(PLUMED_BUILD_CUDA_LIB)
 ENDIF(PLUMED_BUILD_CUDA_LIB)
 
 # Build the Python API
-
 FIND_PROGRAM(PYTHON_EXECUTABLE python)
 FIND_PROGRAM(SWIG_EXECUTABLE swig)
 IF(PYTHON_EXECUTABLE AND SWIG_EXECUTABLE)
