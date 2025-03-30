@@ -4,7 +4,7 @@
 SET (CMAKE_C_COMPILER gcc)
 SET (CMAKE_CPP_COMPILER g++)
 PROJECT(OpenMMPlumed)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 
 # Set installation prefix to current directory/install
 SET(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH "Installation prefix" FORCE)
@@ -15,7 +15,7 @@ INCLUDE_DIRECTORIES("${OPENMM_DIR}/include")
 LINK_DIRECTORIES("${OPENMM_DIR}/lib" "${OPENMM_DIR}/lib/plugins")
 
 # MPI4PY directory with exact path
-SET(MPI4PY_DIR "/usr/local/lib/python3.10/site-packages/mpi4py/include" CACHE PATH "Where mpi4py is installed")
+SET(MPI4PY_DIR "/usr/local/lib/python3.11/site-packages/mpi4py/include" CACHE PATH "Where mpi4py is installed")
 INCLUDE_DIRECTORIES("${MPI4PY_DIR}")
 
 # Plumed directories set relative to current directory
